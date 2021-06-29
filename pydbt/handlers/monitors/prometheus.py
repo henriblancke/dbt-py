@@ -1,3 +1,4 @@
+from ...config import ENV
 from ...types import Message
 from .base import BaseMonitor, Tags
 from prometheus_client import (
@@ -15,11 +16,21 @@ class PrometheusMonitor(BaseMonitor):
         "schema",
         "name",
         "resource_type",
+        "command",
+        "version",
+        "env",
     ]
 
     def __init__(self, host: str, port: str, **kwargs):
         self.host = host
         self.port = port
+        self.common_tags = {**kwargs.get("common_tags", {}), **{"env": ENV}}
+
+    def _merge_tags(self, tags: Tags):
+        if tags:
+            return {**tags, **self.common_tags}
+
+        return self.common_tags
 
     def initialize(self):
         self.registry = CollectorRegistry()
@@ -30,37 +41,39 @@ class PrometheusMonitor(BaseMonitor):
             self.labels,
             registry=self.registry,
         )
+
         self.run_time = Summary(
             "dbt_run_time_seconds",
             "Records the time it takes to complete a full dbt run",
+            labelnames=self.labels,
             registry=self.registry,
         )
         self.exec_time = Histogram(
             "dbt_execution_time_seconds",
             "Records the time it takes to execute a dbt job",
-            self.labels,
+            labelnames=self.labels,
             registry=self.registry,
         )
         self.freshness = Histogram(
             "dbt_freshness_seconds",
             "Records how fresh a source is",
-            self.labels,
+            labelnames=self.labels,
             registry=self.registry,
         )
 
     def _get_labels(self, tags: Tags):
-        print(tags)
         result = []
         if isinstance(tags, dict):
+            tags = self._merge_tags(tags)
             for lbl in self.labels:
-                result.append(tags.get(lbl, None))
-        print(result)
+                result.append(tags.get(lbl, "unknown"))
         return result
 
     def timed(
-        self, name: str, tags: Tags = None, sample_rate: float = 1, use_ms: bool = None
+        self, name: str, tags: Tags = {}, sample_rate: float = 1, use_ms: bool = None
     ):
-        return self.run_time.time()
+        labels = self._get_labels(tags)
+        return self.run_time.labels(*labels).time()
 
     def report_execution_time(self, execution_time: float, tags: Tags):
         labels = self._get_labels(tags)

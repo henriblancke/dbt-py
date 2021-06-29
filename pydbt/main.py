@@ -62,6 +62,7 @@ def main(args: T.List):
     command = args[1:]
     tags = {
         "app": "dbt",
+        "command": command[0],
         "version": dbt_version,
         "number_of_cores": cpu_count(),
     }
