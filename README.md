@@ -4,6 +4,12 @@ Python module to enable dbt on steroids. Enable enhanced logging and alerting. T
 
 Sentry is integrated by default. Enable sentry by setting the default sentry environment variables.
 
+## Usage
+Replace `dbt` with `pydbt`. For example:
+```
+pydbt run -m somemodel
+```
+
 ## Alerting
 
 - Enable `slack` alerting by setting the `SLACK_URL` environment variable.

@@ -16,7 +16,7 @@ try:
     import pypandoc
     long_description = pypandoc.convert('README.md', 'rst')
 except (IOError, ImportError):
-    long_description = "Python dbt executor with custom logging and alerting"
+    long_description = "Python dbt executor with custom logging and alerting that fits into your stack"
 
 INSTALL_REQUIRES = [
     'dbt-snowflake==0.19.*', 'datadog==0.40.1', 'python-dotenv==0.17.0',
@@ -33,8 +33,8 @@ TEST_REQUIRES = [
 
 setup(
     name='pydbt',
-    version="0.5.0",
-    url='https://github.com/PotomacInnovation/dbt-py',
+    version="0.5.1",
+    url='https://github.com/henriblancke/dbt-py',
     license='MIT',
     author="Henri Blancke",
     author_email="blanckehenri@gmail.com",
