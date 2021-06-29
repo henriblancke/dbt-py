@@ -1,0 +1,60 @@
+{
+  "status": "warn",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2021-04-07T18:40:22.896945Z",
+      "completed_at": "2021-04-07T18:40:22.896949Z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2021-04-07T18:40:22.897018Z",
+      "completed_at": "2021-04-07T18:40:25.927923Z"
+    }
+  ],
+  "thread_id": "Thread-3",
+  "execution_time": 3.0316109657287598,
+  "adapter_response": {},
+  "message": null,
+  "node": {
+    "fqn": ["transformations", "core", "hotel_segment"],
+    "database": "DATA_LAKE_DEV",
+    "schema": "core",
+    "unique_id": "source.transformations.core.hotel_segment",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "models/sources.yml",
+    "original_file_path": "models/sources.yml",
+    "name": "hotel_segment",
+    "source_name": "core",
+    "source_description": "This is a dummy source description.",
+    "loader": "pipelinewise",
+    "identifier": "hotel_segment",
+    "resource_type": "source",
+    "quoting": {
+      "database": null,
+      "schema": null,
+      "identifier": null,
+      "column": null
+    },
+    "loaded_at_field": "created_datetime_utc",
+    "freshness": {
+      "warn_after": { "count": 4, "period": "hour" },
+      "error_after": { "count": 12, "period": "hour" },
+      "filter": null
+    },
+    "external": null,
+    "description": "",
+    "columns": {},
+    "meta": {},
+    "source_meta": {},
+    "tags": [],
+    "config": { "enabled": true },
+    "patch_path": null,
+    "unrendered_config": {},
+    "relation_name": "DATA_LAKE_DEV.core.hotel_segment"
+  },
+  "max_loaded_at": "2021-04-07T14:31:38+00:00",
+  "snapshotted_at": "2021-04-07T18:40:24.670000+00:00",
+  "age": 14926.67
+}

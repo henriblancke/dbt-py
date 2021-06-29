@@ -1,0 +1,267 @@
+{
+  "status": "success",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2021-04-07T18:18:48.185887Z",
+      "completed_at": "2021-04-07T18:18:49.077401Z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2021-04-07T18:18:49.077503Z",
+      "completed_at": "2021-04-07T18:18:55.131509Z"
+    }
+  ],
+  "thread_id": "Thread-1",
+  "execution_time": 7.394317150115967,
+  "adapter_response": {
+    "_message": "SUCCESS 5",
+    "code": "SUCCESS",
+    "rows_affected": 5
+  },
+  "message": "SUCCESS 5",
+  "node": {
+    "raw_sql": "{{ config(\n  materialized = 'incremental',\n  unique_key = 'dbx_booking_id'\n) }}\n\nSELECT\n  {{ dbt_utils.star(\n    from = source(\n      'booking',\n      'dbx_booking'\n    ),\n    except = [\"BOOKING_DATA\"]\n  ) }},\n  TRY_PARSE_JSON(REPLACE(booking_data, '\\\\n', '')) AS booking_data\nFROM\n  {{ source(\n    'booking',\n    'dbx_booking'\n  ) }}\n\n{{ incremental_modified_datetime_deleted_utc() }}",
+    "compiled": true,
+    "resource_type": "model",
+    "depends_on": {
+      "macros": [
+        "macro.dbt_utils.star",
+        "macro.transformations.incremental_modified_datetime_deleted_utc",
+        "macro.transformations.grant_select",
+        "macro.dbt_snowflake.set_query_tag",
+        "macro.dbt.should_full_refresh",
+        "macro.dbt.load_relation",
+        "macro.dbt.make_temp_relation",
+        "macro.dbt_snowflake.dbt_snowflake_validate_get_incremental_strategy",
+        "macro.dbt.run_hooks",
+        "macro.dbt.create_table_as",
+        "macro.dbt.run_query",
+        "macro.dbt_snowflake.dbt_snowflake_get_incremental_sql",
+        "macro.dbt.statement",
+        "macro.dbt.persist_docs",
+        "macro.dbt_snowflake.unset_query_tag"
+      ],
+      "nodes": [
+        "source.transformations.booking.dbx_booking",
+        "source.transformations.booking.dbx_booking"
+      ]
+    },
+    "config": {
+      "enabled": true,
+      "materialized": "incremental",
+      "persist_docs": {},
+      "vars": {},
+      "quoting": {},
+      "column_types": {},
+      "alias": null,
+      "schema": "booking_ods",
+      "database": null,
+      "tags": [
+        "daily",
+        "sunrise",
+        "morning",
+        "noon",
+        "afternoon",
+        "evening",
+        "pii"
+      ],
+      "full_refresh": null,
+      "copy_grants": true,
+      "unique_key": "dbx_booking_id",
+      "post-hook": [
+        {
+          "sql": "{{ grant_select(this, \"WH_READ_ROLE\") }}",
+          "transaction": true,
+          "index": null
+        }
+      ],
+      "pre-hook": []
+    },
+    "database": "WAREHOUSE_LOCAL",
+    "schema": "HBL_booking_ods",
+    "fqn": ["transformations", "booking", "dbx_booking"],
+    "unique_id": "model.transformations.dbx_booking",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "booking/dbx_booking.sql",
+    "original_file_path": "models/booking/dbx_booking.sql",
+    "name": "dbx_booking",
+    "alias": "dbx_booking",
+    "checksum": {
+      "name": "sha256",
+      "checksum": "9679b7219a00e184fa64df443acbfa4350a1d995f8f71ab95cbc3174f5021ea9"
+    },
+    "tags": [
+      "daily",
+      "sunrise",
+      "morning",
+      "noon",
+      "afternoon",
+      "evening",
+      "pii"
+    ],
+    "refs": [],
+    "sources": [
+      ["booking", "dbx_booking"],
+      ["booking", "dbx_booking"]
+    ],
+    "description": "Booking data for dbx",
+    "columns": {
+      "dbx_booking_id": {
+        "name": "dbx_booking_id",
+        "description": "primary key",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "booking_id": {
+        "name": "booking_id",
+        "description": "Idgenerated on first sync for a booking",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "name": {
+        "name": "name",
+        "description": "Booking name generated from its reservation.",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "booker_user_id": {
+        "name": "booker_user_id",
+        "description": "FK to person.user. Obtained from remark on initial booking (will need solution for non sabre centric bookings)",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "company_id": {
+        "name": "company_id",
+        "description": "FK to person.company. NULL if not corporate booking. Currently calculated from the the travelers company",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "application_source_id": {
+        "name": "application_source_id",
+        "description": "reference data in application_source table",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "pnr_number": {
+        "name": "pnr_number",
+        "description": "deprecated once vendor_reference_id_to_booking is added.",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "traveler_user_id": {
+        "name": "traveler_user_id",
+        "description": "obtained via sabre profile right now, will probably need to be remark like booker in the future",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "booking_data": {
+        "name": "booking_data",
+        "description": "JSON blob containing all segment and other data for this booking",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "start_date": {
+        "name": "start_date",
+        "description": "Earliest date of any of the active reservations in this booking",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "end_date": {
+        "name": "end_date",
+        "description": "Latest date of any of the active reservertions in this booking",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "stale_at": {
+        "name": "stale_at",
+        "description": "Timestamp of when this row was made stale by a more recent change to the booking. NULL if it's the most recent version of the booking",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "invalidated_at": {
+        "name": "invalidated_at",
+        "description": "Timestamp of when this row was invalidated. NULL if still valid. This is set when a booking is rebuilt from all of its vendor_data, and indicates that this row is not longer considered to be correct",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "created_datetime_utc": {
+        "name": "created_datetime_utc",
+        "description": "",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "modified_datetime_utc": {
+        "name": "modified_datetime_utc",
+        "description": "",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "created_by": {
+        "name": "created_by",
+        "description": "",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      },
+      "modified_by": {
+        "name": "modified_by",
+        "description": "",
+        "meta": {},
+        "data_type": null,
+        "quote": null,
+        "tags": []
+      }
+    },
+    "meta": {},
+    "docs": { "show": true },
+    "patch_path": "models/booking/schema.yml",
+    "build_path": "target/run/transformations/models/booking/dbx_booking.sql",
+    "deferred": false,
+    "unrendered_config": {
+      "copy_grants": true,
+      "tags": ["pii"],
+      "materialized": "incremental",
+      "post-hook": ["{{ grant_select(this, \"WH_READ_ROLE\") }}"],
+      "schema": "booking_ods",
+      "unique_key": "dbx_booking_id"
+    },
+    "compiled_sql": "\n\nSELECT\n  \"DBX_BOOKING_ID\",\n  \"BOOKING_ID\",\n  \"NAME\",\n  \"BOOKER_USER_ID\",\n  \"COMPANY_ID\",\n  \"APPLICATION_SOURCE\",\n  \"TRAVELER_USER_ID\",\n  \"START_DATE\",\n  \"END_DATE\",\n  \"STALE_AT\",\n  \"INVALIDATED_AT\",\n  \"VENDOR_EVENT_DATETIME_UTC\",\n  \"CREATED_DATETIME_UTC\",\n  \"MODIFIED_DATETIME_UTC\",\n  \"CREATED_BY\",\n  \"MODIFIED_BY\",\n  \"IS_CANCELLED\",\n  \"SEARCH_TERMS\",\n  \"_SDC_EXTRACTED_AT\",\n  \"_SDC_BATCHED_AT\",\n  \"_SDC_DELETED_AT\",\n  TRY_PARSE_JSON(REPLACE(booking_data, '\\\\n', '')) AS booking_data\nFROM\n  DATA_LAKE_DEV.booking.dbx_booking\n\n\n  \n  WHERE\n    _sdc_deleted_at IS NOT NULL\n    OR modified_datetime_utc > (\n      SELECT\n        MAX(modified_datetime_utc)\n      FROM\n        WAREHOUSE_LOCAL.HBL_booking_ods.dbx_booking\n    )\n  \n",
+    "extra_ctes_injected": true,
+    "extra_ctes": [],
+    "relation_name": "WAREHOUSE_LOCAL.HBL_booking_ods.dbx_booking"
+  },
+  "agate_table": null
+}

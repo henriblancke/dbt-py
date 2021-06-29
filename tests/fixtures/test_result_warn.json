@@ -1,0 +1,97 @@
+{
+  "status": "warn",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2021-04-07t17:52:26.891117z",
+      "completed_at": "2021-04-07t17:52:26.897454z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2021-04-07t17:52:26.897677z",
+      "completed_at": "2021-04-07t17:52:28.319413z"
+    }
+  ],
+  "thread_id": "thread-3",
+  "execution_time": 1.898899793624878,
+  "adapter_response": {},
+  "message": 1,
+  "node": {
+    "raw_sql": "{{ config(severity='warn') }}{{ test_not_null(_dbt_schema_test_kwargs) }}",
+    "test_metadata": {
+      "name": "not_null",
+      "kwargs": {
+        "column_name": "package_id",
+        "model": "{{ ref('package') }}"
+      },
+      "namespace": null
+    },
+    "compiled": true,
+    "resource_type": "test",
+    "depends_on": {
+      "macros": ["macro.dbt.test_not_null"],
+      "nodes": ["model.transformations.package"]
+    },
+    "config": {
+      "enabled": true,
+      "materialized": "test",
+      "persist_docs": {},
+      "vars": {},
+      "quoting": {},
+      "column_types": {},
+      "alias": null,
+      "schema": null,
+      "database": null,
+      "tags": ["daily", "sunrise", "morning", "noon", "afternoon", "evening"],
+      "full_refresh": null,
+      "severity": "warn",
+      "copy_grants": true,
+      "post-hook": [],
+      "pre-hook": []
+    },
+    "database": "warehouse_local",
+    "schema": "hbl_none",
+    "fqn": [
+      "transformations",
+      "schema_test",
+      "not_null_package_package_id"
+    ],
+    "unique_id": "test.transformations.not_null_package_package_id",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "schema_test/not_null_package_package_id.sql",
+    "original_file_path": "models/core/schema.yml",
+    "name": "not_null_package_package_id",
+    "alias": "not_null_package_package_id",
+    "checksum": { "name": "none", "checksum": "" },
+    "tags": [
+      "schema",
+      "daily",
+      "sunrise",
+      "morning",
+      "noon",
+      "afternoon",
+      "evening"
+    ],
+    "refs": [["package"]],
+    "sources": [],
+    "description": "",
+    "columns": {},
+    "meta": {},
+    "docs": { "show": true },
+    "patch_path": null,
+    "build_path": "target/compiled/transformations/models/core/schema.yml/schema_test/not_null_package_package_id.sql",
+    "deferred": false,
+    "unrendered_config": {
+      "copy_grants": true,
+      "tags": ["daily", "sunrise", "morning", "noon", "afternoon", "evening"],
+      "severity": "warn"
+    },
+    "compiled_sql": "n    n    nnnnselect count() as validation_errorsnfrom warehouse_local.hbl_coredb_ods.packagenwhere package_id is nullnnn",
+    "extra_ctes_injected": true,
+    "extra_ctes": [],
+    "relation_name": null,
+    "column_name": "package_id"
+  },
+  "agate_table": null
+}

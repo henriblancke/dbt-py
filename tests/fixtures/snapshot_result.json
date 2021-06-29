@@ -1,0 +1,78 @@
+{
+  "node": {
+    "raw_sql": "\n  {{ config(\n    target_schema = 'person_derived_ods',\n    unique_key = 'person_company_id',\n    strategy = 'timestamp',\n    updated_at = 'modified_datetime_utc',\n  ) }}\n\n  SELECT\n    {{ star(\n      from = source(\n        'coredb_person',\n        'person_company'\n      )\n    ) }}\n  FROM\n    {{ source(\n      'coredb_person',\n      'person_company'\n    ) }}\n",
+    "database": "WAREHOUSE_LOCAL",
+    "schema": "person_derived_ods",
+    "fqn": [
+      "transformations",
+      "person_company_snapshot",
+      "person_company_snapshot"
+    ],
+    "unique_id": "snapshot.transformations.person_company_snapshot",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "person_company_snapshot.sql",
+    "original_file_path": "snapshots/person_company_snapshot.sql",
+    "name": "person_company_snapshot",
+    "resource_type": "snapshot",
+    "checksum": {
+      "name": "sha256",
+      "checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "alias": "person_company_snapshot",
+    "config": {
+      "enabled": true,
+      "materialized": "snapshot",
+      "persist_docs": {},
+      "post-hook": [],
+      "pre-hook": [],
+      "vars": {},
+      "quoting": {},
+      "column_types": {},
+      "tags": [],
+      "unique_key": "person_company_id",
+      "target_schema": "person_derived_ods",
+      "strategy": "timestamp",
+      "updated_at": "modified_datetime_utc"
+    },
+    "tags": [],
+    "refs": [],
+    "sources": [
+      ["coredb_person", "person_company"],
+      ["coredb_person", "person_company"]
+    ],
+    "depends_on": {
+      "nodes": [
+        "source.transformations.coredb_person.person_company",
+        "source.transformations.coredb_person.person_company"
+      ],
+      "macros": []
+    },
+    "description": "",
+    "columns": {},
+    "build_path": "target/run/transformations/person_company_snapshot.sql",
+    "compiled": true,
+    "compiled_sql": "\n  \n\n  SELECT\n    \n    \n\n    \n  \"PERSON_COMPANY_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"PERSON_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"COMPANY_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"ROLE_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"TITLE\"\n\n\n    ,\n    \n    \n\n    \n  \"PROGRAM\"\n\n\n    ,\n    \n    \n\n    \n  \"START_DATE\"\n\n\n    ,\n    \n    \n\n    \n  \"END_DATE\"\n\n\n    ,\n    \n    \n\n    \n  \"CREATED_BY\"\n\n\n    ,\n    \n    \n\n    \n  \"MODIFIED_BY\"\n\n\n    ,\n    \n    \n\n    \n  \"OPT_DATETIME_UTC\"\n\n\n    ,\n    \n    \n\n    \n  \"CREATED_DATETIME_UTC\"\n\n\n    ,\n    \n    \n\n    \n  \"MODIFIED_DATETIME_UTC\"\n\n\n    ,\n    \n    \n\n    \n  \"_FIVETRAN_DELETED\"\n\n\n    ,\n    \n    \n\n    \n  \"_FIVETRAN_SYNCED\"\n\n\n    ,\n    \n    \n\n    \n  \"PRIMARY\"\n\n\n    ,\n    \n    \n\n    \n  \"BOOKING_OPT_STATUS\"\n\n\n    ,\n    \n    \n\n    \n  \"ACTIVE\"\n\n\n    \n  FROM\n    DATA_LAKE_DEV.coredb_person.person_company",
+    "extra_ctes_injected": true,
+    "extra_ctes": [],
+    "injected_sql": "\n  \n\n  SELECT\n    \n    \n\n    \n  \"PERSON_COMPANY_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"PERSON_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"COMPANY_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"ROLE_ID\"\n\n\n    ,\n    \n    \n\n    \n  \"TITLE\"\n\n\n    ,\n    \n    \n\n    \n  \"PROGRAM\"\n\n\n    ,\n    \n    \n\n    \n  \"START_DATE\"\n\n\n    ,\n    \n    \n\n    \n  \"END_DATE\"\n\n\n    ,\n    \n    \n\n    \n  \"CREATED_BY\"\n\n\n    ,\n    \n    \n\n    \n  \"MODIFIED_BY\"\n\n\n    ,\n    \n    \n\n    \n  \"OPT_DATETIME_UTC\"\n\n\n    ,\n    \n    \n\n    \n  \"CREATED_DATETIME_UTC\"\n\n\n    ,\n    \n    \n\n    \n  \"MODIFIED_DATETIME_UTC\"\n\n\n    ,\n    \n    \n\n    \n  \"_FIVETRAN_DELETED\"\n\n\n    ,\n    \n    \n\n    \n  \"_FIVETRAN_SYNCED\"\n\n\n    ,\n    \n    \n\n    \n  \"PRIMARY\"\n\n\n    ,\n    \n    \n\n    \n  \"BOOKING_OPT_STATUS\"\n\n\n    ,\n    \n    \n\n    \n  \"ACTIVE\"\n\n\n    \n  FROM\n    DATA_LAKE_DEV.coredb_person.person_company"
+  },
+  "unique_id": "someid13",
+  "status": "success",
+  "adapter_response": {},
+  "execution_time": 23.130106925964355,
+  "thread_id": "Thread-1",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2019-12-12T19:15:30.347444Z",
+      "completed_at": "2019-12-12T19:15:32.180207Z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2019-12-12T19:15:32.180269Z",
+      "completed_at": "2019-12-12T19:15:53.477112Z"
+    }
+  ],
+  "skip": false
+}

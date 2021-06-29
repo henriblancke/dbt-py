@@ -21,5 +21,5 @@ make install
 
 # Running tests
 ```
-make runtests
+make test
 ```

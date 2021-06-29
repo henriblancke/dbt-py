@@ -1,0 +1,60 @@
+{
+  "status": "error",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2021-04-07T18:40:25.848808Z",
+      "completed_at": "2021-04-07T18:40:25.848813Z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2021-04-07T18:40:25.848880Z",
+      "completed_at": "2021-04-07T18:40:28.270128Z"
+    }
+  ],
+  "thread_id": "Thread-1",
+  "execution_time": 2.421811819076538,
+  "adapter_response": {},
+  "message": null,
+  "node": {
+    "fqn": ["transformations", "core", "pnr_tickets"],
+    "database": "DATA_LAKE_DEV",
+    "schema": "core",
+    "unique_id": "source.transformations.core.pnr_tickets",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "models/sources.yml",
+    "original_file_path": "models/sources.yml",
+    "name": "pnr_tickets",
+    "source_name": "core",
+    "source_description": "This is a dummy source description.",
+    "loader": "pipelinewise",
+    "identifier": "pnr_tickets",
+    "resource_type": "source",
+    "quoting": {
+      "database": null,
+      "schema": null,
+      "identifier": null,
+      "column": null
+    },
+    "loaded_at_field": "created_datetime_utc",
+    "freshness": {
+      "warn_after": { "count": 6, "period": "day" },
+      "error_after": { "count": 10, "period": "day" },
+      "filter": null
+    },
+    "external": null,
+    "description": "",
+    "columns": {},
+    "meta": {},
+    "source_meta": {},
+    "tags": [],
+    "config": { "enabled": true },
+    "patch_path": null,
+    "unrendered_config": {},
+    "relation_name": "DATA_LAKE_DEV.core.pnr_tickets"
+  },
+  "max_loaded_at": "2019-08-08T18:14:03+00:00",
+  "snapshotted_at": "2021-04-07T18:40:27.654000+00:00",
+  "age": 52532784.654
+}

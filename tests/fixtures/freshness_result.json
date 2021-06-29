@@ -1,0 +1,60 @@
+{
+  "status": "pass",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2021-04-07T18:22:06.240889Z",
+      "completed_at": "2021-04-07T18:22:06.240894Z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2021-04-07T18:22:06.240967Z",
+      "completed_at": "2021-04-07T18:22:08.608043Z"
+    }
+  ],
+  "thread_id": "Thread-4",
+  "execution_time": 2.3677098751068115,
+  "adapter_response": {},
+  "message": null,
+  "node": {
+    "fqn": ["transformations", "core", "package_segment"],
+    "database": "DATA_LAKE_DEV",
+    "schema": "core",
+    "unique_id": "source.transformations.core.package_segment",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "models/sources.yml",
+    "original_file_path": "models/sources.yml",
+    "name": "package_segment",
+    "source_name": "core",
+    "source_description": "This is a dummy source description.",
+    "loader": "pipelinewise",
+    "identifier": "package_segment",
+    "resource_type": "source",
+    "quoting": {
+      "database": null,
+      "schema": null,
+      "identifier": null,
+      "column": null
+    },
+    "loaded_at_field": "created_datetime_utc",
+    "freshness": {
+      "warn_after": { "count": 4, "period": "hour" },
+      "error_after": { "count": 12, "period": "hour" },
+      "filter": null
+    },
+    "external": null,
+    "description": "",
+    "columns": {},
+    "meta": {},
+    "source_meta": {},
+    "tags": [],
+    "config": { "enabled": true },
+    "patch_path": null,
+    "unrendered_config": {},
+    "relation_name": "DATA_LAKE_DEV.core.package_segment"
+  },
+  "max_loaded_at": "2021-04-07T17:55:48+00:00",
+  "snapshotted_at": "2021-04-07T18:22:07.755000+00:00",
+  "age": 1579.755
+}

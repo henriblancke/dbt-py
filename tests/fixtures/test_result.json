@@ -1,0 +1,90 @@
+{
+  "status": "pass",
+  "timing": [
+    {
+      "name": "compile",
+      "started_at": "2021-04-07t17:16:32.987621z",
+      "completed_at": "2021-04-07t17:16:33.010372z"
+    },
+    {
+      "name": "execute",
+      "started_at": "2021-04-07t17:16:33.010483z",
+      "completed_at": "2021-04-07t17:16:34.123089z"
+    }
+  ],
+  "thread_id": "thread-1",
+  "execution_time": 1.7002599239349365,
+  "adapter_response": {},
+  "message": 0,
+  "node": {
+    "raw_sql": "{{ config(severity='warn') }}{{ test_not_null(_dbt_schema_test_kwargs) }}",
+    "test_metadata": {
+      "name": "not_null",
+      "kwargs": { "column_name": "id", "model": "{{ ref('airport') }}" },
+      "namespace": null
+    },
+    "compiled": true,
+    "resource_type": "test",
+    "depends_on": {
+      "macros": ["macro.dbt.test_not_null"],
+      "nodes": ["model.transformations.airport"]
+    },
+    "config": {
+      "enabled": true,
+      "materialized": "test",
+      "persist_docs": {},
+      "vars": {},
+      "quoting": {},
+      "column_types": {},
+      "alias": null,
+      "schema": null,
+      "database": null,
+      "tags": ["daily", "sunrise", "morning", "noon", "afternoon", "evening"],
+      "full_refresh": null,
+      "severity": "warn",
+      "copy_grants": true,
+      "post-hook": [],
+      "pre-hook": []
+    },
+    "database": "warehouse_local",
+    "schema": "hbl_none",
+    "fqn": ["transformations", "schema_test", "not_null_airport_id"],
+    "unique_id": "test.transformations.not_null_airport_id",
+    "package_name": "transformations",
+    "root_path": "/root/project",
+    "path": "schema_test/not_null_airport_id.sql",
+    "original_file_path": "models/location/schema.yml",
+    "name": "not_null_airport_id",
+    "alias": "not_null_airport_id",
+    "checksum": { "name": "none", "checksum": "" },
+    "tags": [
+      "schema",
+      "daily",
+      "sunrise",
+      "morning",
+      "noon",
+      "afternoon",
+      "evening"
+    ],
+    "refs": [["airport"]],
+    "sources": [],
+    "description": "",
+    "columns": {},
+    "meta": {},
+    "docs": { "show": true },
+    "patch_path": null,
+    "build_path": "target/compiled/transformations/models/location/schema.yml/schema_test/not_null_airport_id.sql",
+    "deferred": false,
+    "unrendered_config": {
+      "copy_grants": true,
+      "tags": ["daily", "sunrise", "morning", "noon", "afternoon", "evening"],
+      "severity": "warn"
+    },
+    "compiled_sql": "select count() as validation_errors\nfrom warehouse_local.hbl_location.airport\nwhere id is null\n\n\n",
+    "extra_ctes_injected": true,
+    "extra_ctes": [],
+    "relation_name": null,
+    "column_name": "id"
+  },
+  "agate_table": null
+}
