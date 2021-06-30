@@ -19,7 +19,7 @@ except (IOError, ImportError):
     long_description = "Python dbt executor with custom logging and alerting that fits into your stack"
 
 INSTALL_REQUIRES = [
-    'dbt-snowflake==0.19.*', 'datadog==0.40.1', 'python-dotenv==0.17.0',
+    'dbt-core==0.19.*', 'datadog==0.40.1', 'python-dotenv==0.17.0',
     'pygments>=2.4.0', 'sentry-sdk==1.1.0', "prometheus-client==0.11.0"
 ]
 
