@@ -33,7 +33,7 @@ TEST_REQUIRES = [
 
 setup(
     name='pydbt',
-    version="0.5.2",
+    version="0.5.3",
     url='https://github.com/henriblancke/dbt-py',
     license='MIT',
     author="Henri Blancke",
