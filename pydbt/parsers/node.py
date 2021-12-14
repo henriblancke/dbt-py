@@ -10,8 +10,7 @@ from dbt.contracts.graph.parsed import (
     SnapshotConfig,
 )
 from dbt.contracts.graph.compiled import (
-    CompiledDataTestNode,
-    CompiledSchemaTestNode,
+    CompiledGenericTestNode,
     CompiledSeedNode,
     CompiledSnapshotNode,
 )
@@ -97,9 +96,7 @@ def parse_node(result: NodeResult) -> T.Dict:
     if isinstance(node, CompiledSeedNode):
         log.debug("parsing seed node config")
         config = _parse_seed_node_config(node.config)
-    elif isinstance(node, CompiledDataTestNode) or isinstance(
-        node, CompiledSchemaTestNode
-    ):
+    elif isinstance(node, CompiledGenericTestNode):
         log.debug("parsing test node config")
         config = _parse_test_node_config(node.config)
     elif isinstance(node, CompiledSnapshotNode):
