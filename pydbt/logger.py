@@ -1,9 +1,11 @@
 import re
 import sys
+import logging
 import logbook
 import sentry_sdk
 import typing as T
 from sentry_sdk.hub import Hub
+from sentry_sdk.integrations.logging import ignore_logger
 from logbook import NullHandler
 from sentry_sdk.utils import (
     to_string,
@@ -13,12 +15,14 @@ from sentry_sdk.utils import (
     capture_internal_exceptions,
 )
 from dbt.contracts.results import NodeStatus
-from dbt.logger import log_manager as dbt_manager, OutputHandler
 
 from .constants import StatusColor
 from .config import NAME, ENV, SENTRY_DSN, APP_VERSION
 
 logger = logbook.Logger("pydbt")
+
+ignore_logger('configured_file')
+ignore_logger('configured_std_out')
 
 sentry_sdk.init(
     dsn=SENTRY_DSN,
@@ -167,26 +171,18 @@ class LogManager(logbook.NestedSetup):
         set_sentry_tags(tags)
 
         self._null_handler = NullHandler()
-        self._dbt_handler = dbt_manager
-        self._output_handler = OutputHandler(stdout, bubble=True)
         self._sentry_handler = SentryHandler(level=logbook.WARNING, bubble=True)
         self._format_processor = FormatMessage()
         self._clean_message_processor = CleanMessage()
 
-        self._dbt_handler._file_handler.disabled = True  # hack to disable file logger
-
         super().__init__(
             [
                 self._null_handler,
-                self._output_handler,
                 self._sentry_handler,
                 self._format_processor,
                 self._clean_message_processor,
             ]
         )
-
-    def set_level(self, level: str):
-        self._output_handler.level = logbook.lookup_level(level.upper())
 
     def format_json(self):
         for handler in self.objects:
