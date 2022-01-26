@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import http
@@ -11,7 +12,6 @@ from multiprocessing import cpu_count
 from .parsers.formatter import Formatter
 from dbt.contracts.results import RunExecutionResult
 from .logger import GLOBAL_LOGGER as log, LogManager, AppendTags
-
 
 # Hack to silence TCPServer logs
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
@@ -35,7 +35,7 @@ def run(command: T.List, tags: T.Dict):
             return dbt.main.handle_and_check(cmd)
 
         res: RunExecutionResult
-        res, _ = run_command(command)
+        res, success = run_command(command)
         for idx, result in enumerate(res.results):
             msg: Message = Formatter.format(result)
             stats.report(msg)
@@ -48,7 +48,7 @@ def run(command: T.List, tags: T.Dict):
                     context=msg.context,
                 )
 
-        return sys.exit(0)
+        return sys.exit(0 if success else 1)
 
     except Exception as err:
         log.error(err)
