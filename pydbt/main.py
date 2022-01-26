@@ -1,4 +1,3 @@
-import os
 import sys
 import time
 import http
@@ -12,6 +11,7 @@ from multiprocessing import cpu_count
 from .parsers.formatter import Formatter
 from dbt.contracts.results import RunExecutionResult
 from .logger import GLOBAL_LOGGER as log, LogManager, AppendTags
+
 
 # Hack to silence TCPServer logs
 class QuietHandler(http.server.SimpleHTTPRequestHandler):

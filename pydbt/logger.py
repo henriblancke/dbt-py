@@ -1,6 +1,5 @@
 import re
 import sys
-import logging
 import logbook
 import sentry_sdk
 import typing as T
