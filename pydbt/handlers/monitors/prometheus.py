@@ -24,6 +24,7 @@ class PrometheusMonitor(BaseMonitor):
     def __init__(self, host: str, port: str, **kwargs):
         self.host = host
         self.port = port
+        self.timeout = kwargs.get("timeout", 30)
         self.common_tags = {**kwargs.get("common_tags", {}), **{"env": ENV}}
 
     def _merge_tags(self, tags: Tags):
@@ -100,4 +101,6 @@ class PrometheusMonitor(BaseMonitor):
         if msg.reporting and msg.reporting.rows:
             self.report_rows_moved(msg.reporting.rows, tags=msg.context)
 
-        return push_to_gateway(f"{self.host}:{self.port}", "dbt", self.registry)
+        return push_to_gateway(
+            f"{self.host}:{self.port}", "dbt", self.registry, timeout=self.timeout
+        )
